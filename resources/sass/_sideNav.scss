@@ -1,0 +1,59 @@
+.sidenav{
+    min-height: 100vh;
+    background-color: $primary;
+
+
+    .sidenav-list{
+
+        list-style-type: none;
+        padding-top: 2em;
+        padding-left: 16px;
+        .fa-wrench, .fa-home, .fa-user-friends{
+            margin-right: .5em;
+        }
+        li{
+            a{
+                color: #fff;
+                font-size: 18px;
+                display: block;
+                padding: .5em;
+                text-transform: uppercase;
+                font-weight: 600;
+                white-space: nowrap;
+                &:hover, &:focus{
+                    color: #6a6a6a;
+                }
+            }
+        }
+    }
+
+    .servis-menu{
+        list-style-type: none;
+        padding-left: 30px;
+        height: 0;
+        transform: translateY(-15px);
+        opacity: 0;
+        transition: all 300ms;
+        overflow: hidden;
+        margin-top: 0;
+        li{
+            a{
+                color: #fff;
+                font-size: 16px;
+                display: block;
+                padding: .5em;
+                text-transform: none;
+                font-weight: normal;
+                &:hover, &:focus{
+                    color: #6a6a6a;
+                }
+            }
+        }
+    }
+}
+
+.sideBarIcon{
+    cursor: pointer;
+    font-size: 28px;
+    padding: 0 1em 0 .5em;
+}
