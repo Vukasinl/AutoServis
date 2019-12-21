@@ -13,42 +13,27 @@
             <th scope="col">Na autu urađeno</th>
             <th scope="col">Datum prijema</th>
             <th scope="col">Datum servisa</th>
-            <th scope="col">Servis</th>
+            <th scope="col">Akcije</th>
         </tr>
         </thead>
         <tbody>
         <tr>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-            <td>@mdo</td>
-            <td>@mdo</td>
-            <td>@mdo</td>
-            <td>@mdo</td>
-            <td>@mdo</td>
-            <td>@mdo</td>
-        </tr>
-        <tr>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>@fat</td>
-            <td>@fat</td>
-            <td>@fat</td>
-            <td>@fat</td>
-            <td>@fat</td>
-            <td>@fat</td>
-            <td>@fat</td>
-        </tr>
-        <tr>
-            <td>Larry the Bird</td>
-            <td>Larry the Bird</td>
-            <td>@twitter</td>
-            <td>@twitter</td>
-            <td>@twitter</td>
-            <td>@twitter</td>
-            <td>@twitter</td>
-            <td>@twitter</td>
-            <td>@twitter</td>
+            @foreach($services as $service)
+                <tr>
+                    <td>{{$service->customer->name}}</td>
+                    <td>{{$service->customer->carModel}}</td>
+                    <td>{{$service->description}}</td>
+                    <td>{{$service->customer->phoneNum}}</td>
+                    <td>{{$service->customer->address}}</td>
+                    <td>{{$service->done}}</td>
+                    <td>{{$service->created_at}}</td>
+                    <td>{{$service->updated_at}}</td>
+                    <td>
+
+                    </td>
+
+                </tr>
+            @endforeach
         </tr>
         </tbody>
     </table>

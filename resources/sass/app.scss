@@ -132,18 +132,8 @@ a{color: #000; text-decoration: none; &:hover,&:active{text-decoration: none;}}
 
 //Customer Form
 .customer-form{
-    position: absolute;
-    overflow: hidden;
-    display: none;
-    top: 50px;
-    left: 10%;
-    z-index: 10;
-    width: 70%;
     .fa-times{
         font-size: 26px;
-        position: absolute;
-        top: 8px;
-        right: 16px;
         color: $danger;
         &:hover, &:focus{
             color: lighten($danger, 10%);
@@ -155,5 +145,20 @@ a{color: #000; text-decoration: none; &:hover,&:active{text-decoration: none;}}
         label{
             text-align: right;
         }
+    }
+}
+
+//Services index
+.table-services{
+    .fa-edit, .fa-check-double, .fa-trash-alt{
+        font-size: 20px;
+        margin-right: 4px;
+        cursor: pointer;
+    }
+    .fa-edit:hover, .fa-edit:focus{ color: #0040a5;}
+    .fa-check-double:hover, .fa-edit:focus{ color: $success;}
+    .fa-trash-alt:hover, .fa-edit:focus{ color: $danger;}
+    #destroyForm{
+        display: inline;
     }
 }

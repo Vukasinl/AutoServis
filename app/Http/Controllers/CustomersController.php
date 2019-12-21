@@ -3,83 +3,103 @@
 namespace App\Http\Controllers;
 
 use App\Customer;
+use App\Service;
+use Illuminate\Support\Facades\DB;
+use Validator;
 use Illuminate\Http\Request;
 
 class CustomersController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public function __construct()
     {
-        //
+        $this->middleware('auth');
     }
+    public function index(){
+        $customers = Customer::orderBy('name')->paginate(20);
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return view('customers.index', compact('customers'));
     }
+    public function load(Request $request){
+        if($request->criteria === ""){
+            $customers = Customer::all();
+            return response()->json(['customers' => $customers]);
+        }
+        $customers = DB::table('customers')
+            ->where('carModel', 'like', '%' . $request->criteria . '%')
+            ->orWhere('name', 'like', '%' . $request->criteria . '%')
+            ->get();
+        $newCustomers = [];
+        foreach ($customers as $customer){
+            $newCustomers[] = $customer->carModel . " | " . $customer->name;
+        }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+        return response()->json(['customers' => $newCustomers]);
+
+    }
     public function store(Request $request)
     {
-        //
+
+        $validator = Validator::make($request->all(), [
+            'name'     => 'required',
+            'email'    => 'nullable',
+            'plateNum' => 'required',
+            'carModel' => 'required',
+            'phoneNum' => 'nullable',
+            'address'  => 'nullable'
+        ]);
+        if($validator->fails()){
+            return response()->json(['errors' => $validator->errors()->all()]);
+        }
+        if (Customer::where('name', $request->name)->where('carModel', $request->carModel)->count() > 0) {
+            return response()->json(['exists' => 'Klijent već postoji u bazi!']);
+        }
+        $data =array(
+            'name'     => $request->name,
+            'email'    => $request->email,
+            'plateNum' => $request->plateNum,
+            'carModel' => $request->carModel,
+            'phoneNum' => $request->phoneNum,
+            'address'  => $request->address
+        );
+
+
+
+        Customer::create($data);
+
+        return response()->json(['success' => 'Klijent uspešno dodat!']);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Customer  $customer
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Customer $customer)
-    {
-        //
-    }
+    public function edit($id){
+        $customer = Customer::findOrFail($id);
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Customer  $customer
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Customer $customer)
-    {
-        //
+        return view('customers.edit', compact('customer'));
     }
+    public function update(Request $request, $id){
+        $data = $request->validate([
+            'name'        => 'required',
+            'carModel'    => 'required',
+            'plateNum'    => 'required',
+            'phoneNum'    => 'nullable',
+            'address'     => 'nullable',
+            'email'       => 'nullable'
+        ]);
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Customer  $customer
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Customer $customer)
-    {
-        //
+        $customer = Customer::findOrFail($id);
+
+        $customer->update($data);
+
+        return redirect()->route('customers.index');
     }
+    public function show($id){
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Customer  $customer
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Customer $customer)
-    {
-        //
+    }
+    public function destroy($id){
+        $customer = Customer::find($id);
+        $services = Service::where('customer_id', $id)->delete();
+
+        $customer->delete();
+
+
+        return redirect()->route('customers.index');
     }
 }

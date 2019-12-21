@@ -8,7 +8,7 @@
                 <li><a href="{!! url('services/finished') !!}">Završeni auti</a></li>
             </ul>
         </li>
-        <li><a href="#"><i class="fas fa-user-friends"></i>Mušterije</a></li>
+        <li><a href="{!! url('customers') !!}"><i class="fas fa-user-friends"></i>Klijenti</a></li>
     </ul>
 
 </div>

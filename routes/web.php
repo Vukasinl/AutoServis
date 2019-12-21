@@ -14,8 +14,13 @@
 Route::get('/', 'HomeController@index');
 
 Route::get('services/finished','ServicesController@finished');
+Route::get('services/{id}/finish','ServicesController@finish')->name('services.finish');
 
 Route::resource('services', 'ServicesController');
+
+Route::post('customers/load', 'CustomersController@load')->name('customers.load');
+
+Route::resource('customers', 'CustomersController');
 
 
 

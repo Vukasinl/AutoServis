@@ -11551,21 +11551,8 @@ a:active {
   color: #6e6e6e;
 }
 
-.customer-form {
-  position: absolute;
-  overflow: hidden;
-  display: none;
-  top: 50px;
-  left: 10%;
-  z-index: 10;
-  width: 70%;
-}
-
 .customer-form .fa-times {
   font-size: 26px;
-  position: absolute;
-  top: 8px;
-  right: 16px;
   color: #e3342f;
 }
 
@@ -11581,5 +11568,32 @@ a:active {
 
 .customer-form .form-group label {
   text-align: right;
+}
+
+.table-services .fa-edit,
+.table-services .fa-check-double,
+.table-services .fa-trash-alt {
+  font-size: 20px;
+  margin-right: 4px;
+  cursor: pointer;
+}
+
+.table-services .fa-edit:hover,
+.table-services .fa-edit:focus {
+  color: #0040a5;
+}
+
+.table-services .fa-check-double:hover,
+.table-services .fa-edit:focus {
+  color: #38c172;
+}
+
+.table-services .fa-trash-alt:hover,
+.table-services .fa-edit:focus {
+  color: #e3342f;
+}
+
+.table-services #destroyForm {
+  display: inline;
 }
 

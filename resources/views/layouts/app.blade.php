@@ -41,9 +41,87 @@ use Illuminate\Support\Facades\Route;
 integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 crossorigin="anonymous"></script>
 <script src="{{ asset('js/sideNav.js') }}"></script>
+
     @if(request()->routeIs('services.create'))
         <script src="{{ asset('js/customers.js') }}"></script>
-    @endif
+        <script>
+            jQuery(document).ready(function($){
+                var datalist = $('#suggestions');
+                var input = $('#customer_id');
 
+                $('#customerForm').on('submit', function(e){
+                    e.preventDefault();
+
+                    $.ajax({
+                        url : "{{ route('customers.store') }}",
+                        method : "POST",
+                        data : $('#customerForm').serialize(),
+                        success : function(data){
+                            var html = '';
+                            if(data.errors){
+                                html = '<div class="alert alert-danger">';
+                                for(let i = 0; i < data.errors.length; i++){
+                                    html += '<p>'+data.errors[i]+'</p>';
+                                }
+                                html += '</div>';
+                            }
+                            if(data.exists){
+                                html += '<div class="alert alert-danger">'+data.exists+'</div>';
+                            }
+                            if(data.success){
+                                html += '<div class="alert alert-success">'+data.success+'</div>';
+                                var customerField = $('#carModel').val()  + ' | ' + $('#name').val();
+                                $('#customer_id').val(customerField);
+                                $('#customerForm')[0].reset();
+                            }
+                            $('#formResult').html(html);
+                        }
+                    });
+                });
+
+                input.on('input', function(){
+
+
+                    $.ajax({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        url : "{{ url('customers/load') }}",
+                        data: {
+                            'criteria': input.val()
+                        },
+                        method : "POST",
+                        success : function(data){
+
+                            datalist.empty();
+                            for (var i = 0; i < data.customers.length; i++) {
+
+
+                                var option = document.createElement('option');
+                                console.log("test: " +data.customers[i]);
+                                option.value = data.customers[i];
+                                datalist.append(option);
+                            }
+
+
+                        }
+                    });
+                });
+
+            });
+
+        </script>
+    @endif
+    @if(request()->routeIs('customers.index') || request()->routeIs('services.index'))
+        <script>
+            jQuery(document).ready(function($){
+               $('#submitDestroyForm').click(function(e){
+                   e.preventDefault();
+                   $('#destroyForm').submit();
+               });
+            });
+
+        </script>
+    @endif
 </body>
 </html>
