@@ -24,9 +24,10 @@
                 <td>{{$service->customer->address}}</td>
                 <td>{{$service->created_at}}</td>
                 <td>
-                    <a href="services/{{ $service->id }}/edit"><i class="fas fa-edit"></i></a>
-                    <a href="services/{{$service->id}}/finish"><i class="fas fa-check-double"></i></a>
-
+                    @auth
+                        <a href="services/{{ $service->id }}/edit"><i class="fas fa-edit"></i></a>
+                        <a href="services/{{$service->id}}/finish"><i class="fas fa-check-double"></i></a>
+                    @endauth
                 </td>
 
             </tr>

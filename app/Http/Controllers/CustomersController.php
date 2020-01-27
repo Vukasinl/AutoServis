@@ -12,7 +12,7 @@ class CustomersController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth')->only(['edit']);
     }
     public function index(){
         $customers = Customer::orderBy('name')->paginate(20);
@@ -40,7 +40,7 @@ class CustomersController extends Controller
     {
 
         $validator = Validator::make($request->all(), [
-            'name'     => 'required',
+            'name'     => 'required|min:3',
             'email'    => 'nullable',
             'plateNum' => 'required',
             'carModel' => 'required',
@@ -91,7 +91,9 @@ class CustomersController extends Controller
         return redirect()->route('customers.index');
     }
     public function show($id){
-
+        $customer = Customer::where('id', $id)->with('services')->firstOrFail();
+//        dd($customer);
+        return view('customers.show', compact('customer'));
     }
     public function destroy($id){
         $customer = Customer::find($id);

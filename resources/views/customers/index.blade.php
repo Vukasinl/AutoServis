@@ -22,7 +22,10 @@
                 <td>{{$customer->phoneNum}}</td>
                 <td>{{$customer->address}}</td>
                 <td>
-                    <a href="customers/{{ $customer->id }}/edit"><i class="fas fa-edit"></i></a>
+                    <a href="customers/{{ $customer->id }}"><i class="fas fa-info-circle"></i></a>
+                    @auth
+                        <a href="customers/{{ $customer->id }}/edit"><i class="fas fa-edit"></i></a>
+                    @endauth
                 </td>
 
             </tr>

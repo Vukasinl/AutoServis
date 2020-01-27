@@ -41,6 +41,14 @@
                     {!! Form::textarea('description', null, ['class' => 'form-control']) !!}
                 </div>
             </div>
+        @if($service->isDone)
+            <div class="form-group row my-4">
+                {!! Form::label('done', 'Urađeno na autu: ', ['class' => 'col-sm-2']) !!}
+                <div class="col-sm-10">
+                    {!! Form::textarea('done', null, ['class' => 'form-control']) !!}
+                </div>
+            </div>
+        @endif
             <div class="form-group row my-4">
                 {!! Form::label('phoneNum', 'Telefon: ', ['class' => 'col-sm-2']) !!}
                 <div class="col-sm-10">

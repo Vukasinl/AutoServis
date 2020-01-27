@@ -10,7 +10,7 @@ class ServicesController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth')->only(['create', 'edit', 'finish']);
     }
     /**
      * Display a listing of the resource.
@@ -117,6 +117,8 @@ class ServicesController extends Controller
 
             return redirect()->route('services.index');
         }
+
+
         $request->validate([
             'name'        => 'required',
             'carModel'    => 'required',

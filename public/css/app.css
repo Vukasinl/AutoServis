@@ -11422,7 +11422,7 @@ a.text-dark:focus {
 }
 
 a {
-  color: #000;
+  font-weight: 600;
   text-decoration: none;
 }
 
@@ -11537,7 +11537,7 @@ a:active {
 }
 
 .servis-form .form-group label {
-  text-align: right;
+  text-align: left;
 }
 
 .servis-form .add-customer .fa-plus-square {
@@ -11549,6 +11549,12 @@ a:active {
 .servis-form .add-customer .fa-plus-square:focus {
   cursor: pointer;
   color: #6e6e6e;
+}
+
+@media only screen and (min-width: 960px) {
+  .servis-form .form-group label {
+    text-align: right;
+  }
 }
 
 .customer-form .fa-times {
@@ -11567,15 +11573,23 @@ a:active {
 }
 
 .customer-form .form-group label {
-  text-align: right;
+  text-align: left;
+}
+
+@media only screen and (min-width: 960px) {
+  .customer-form .form-group label {
+    text-align: right;
+  }
 }
 
 .table-services .fa-edit,
 .table-services .fa-check-double,
-.table-services .fa-trash-alt {
+.table-services .fa-trash-alt,
+.table-services .fa-info-circle {
   font-size: 20px;
   margin-right: 4px;
   cursor: pointer;
+  color: #000;
 }
 
 .table-services .fa-edit:hover,
@@ -11593,7 +11607,20 @@ a:active {
   color: #e3342f;
 }
 
+.table-services .fa-info-circle:hover,
+.table-services .fa-info-circle:focus {
+  color: #0040a5;
+}
+
 .table-services #destroyForm {
   display: inline;
+}
+
+.navbar a {
+  color: #fff;
+}
+
+.navbar a.dropdown-item {
+  color: #000;
 }
 

@@ -7,22 +7,22 @@
     @csrf
 
     <div class="form-group row">
-        {!! Form::label('customer_id', 'Klijent: ', ['class' => 'col-sm-2']) !!}
+        {!! Form::label('customer_id', 'Klijent: ', ['class' => 'col-12 col-md-2']) !!}
 
 
-        <div class="col-sm-8">
+        <div class="col-12 col-md-8">
             {!! Form::text('customer_id', null, ['class' => 'form-control', 'list' => 'suggestions', 'autocomplete' => 'off']) !!}
             <datalist id="suggestions">
 
             </datalist>
         </div>
-        <div class="col-sm-2 add-customer">
+        <div class="col-12 offset-md-0 col-md-2 add-customer">
             <span class="fas fa-plus-square" data-toggle="modal" data-target="#customer-form"></span>
         </div>
     </div>
     <div class="form-group row">
-        {!! Form::label('description', 'Opis kvara: ', ['class' => 'col-sm-2']) !!}
-        <div class="col-sm-10">
+        {!! Form::label('description', 'Opis kvara: ', ['class' => 'col-md-2']) !!}
+        <div class="col-md-10">
             {!! Form::textarea('description', null, ['class' => 'form-control']) !!}
         </div>
     </div>
@@ -50,60 +50,59 @@
                 {!! Form::open(['route' => 'customers.store', 'id' => 'customerForm']) !!}
                 <span id="formResult">
                 </span>
-                <div class="alert alert-danger">
-                    <ul>
+
+
                         @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
+                            <div class="alert alert-danger">{{ $error }}</div>
                         @endforeach
-                    </ul>
-                </div>
+
 
                 {{csrf_field()}}
 
                 <div class="form-group row">
-                    {!! Form::label('name', '*Ime: ', ['class' => 'col-sm-3']) !!}
+                    {!! Form::label('name', '*Ime: ', ['class' => 'col-12 col-md-3']) !!}
 
-                    <div class="col-sm-9">
+                    <div class="col-12 col-md-9">
                         {!! Form::text('name', null, ['class' => 'form-control']) !!}
                     </div>
                 </div>
                 <div class="form-group row">
-                    {!! Form::label('plateNum', '*Broj registarskih tablica: ', ['class' => 'col-sm-3']) !!}
+                    {!! Form::label('plateNum', '*Broj registarskih tablica: ', ['class' => 'col-md-3']) !!}
 
 
-                    <div class="col-sm-9">
+                    <div class="col-md-9">
                         {!! Form::text('plateNum', null, ['class' => 'form-control', 'required' => 'required']) !!}
                     </div>
                 </div>
                 <div class="form-group row">
-                    {!! Form::label('carModel', '*Model auta: ', ['class' => 'col-sm-3']) !!}
+                    {!! Form::label('carModel', '*Model auta: ', ['class' => 'col-md-3']) !!}
 
 
-                    <div class="col-sm-9">
+                    <div class="col-md-9">
                         {!! Form::text('carModel', null, ['class' => 'form-control', 'required' => 'required']) !!}
                     </div>
                 </div>
                 <div class="form-group row">
-                    {!! Form::label('email', 'Email adresa: ', ['class' => 'col-sm-3']) !!}
+                    {!! Form::label('email', 'Email adresa: ', ['class' => 'col-md-3']) !!}
 
 
-                    <div class="col-sm-9">
+                    <div class="col-md-9">
                         {!! Form::text('email', null, ['class' => 'form-control']) !!}
                     </div>
                 </div>
                 <div class="form-group row">
-                    {!! Form::label('phoneNum', 'Broj telefona: ', ['class' => 'col-sm-3']) !!}
+                    {!! Form::label('phoneNum', 'Broj telefona: ', ['class' => 'col-md-3']) !!}
 
 
-                    <div class="col-sm-9">
+                    <div class="col-md-9">
                         {!! Form::text('phoneNum', null, ['class' => 'form-control']) !!}
                     </div>
                 </div>
                 <div class="form-group row">
-                    {!! Form::label('address', 'Adresa: ', ['class' => 'col-sm-3']) !!}
+                    {!! Form::label('address', 'Adresa: ', ['class' => 'col-md-3']) !!}
 
 
-                    <div class="col-sm-9">
+                    <div class="col-md-9">
                         {!! Form::text('address', null, ['class' => 'form-control']) !!}
                     </div>
                 </div>

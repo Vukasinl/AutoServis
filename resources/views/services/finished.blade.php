@@ -17,7 +17,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr>
+
             @foreach($services as $service)
                 <tr>
                     <td>{{$service->customer->name}}</td>
@@ -29,12 +29,14 @@
                     <td>{{$service->created_at}}</td>
                     <td>{{$service->updated_at}}</td>
                     <td>
-
+                        @auth
+                            <a href="{{url("services/$service->id")}}/edit"><i class="fas fa-edit"></i></a>
+                        @endauth
                     </td>
 
                 </tr>
             @endforeach
-        </tr>
+
         </tbody>
     </table>
 
